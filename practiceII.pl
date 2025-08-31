@@ -20,3 +20,38 @@ vehicle(tesla, 'Model S Plaid', sedan, 130000, 2023).
 vehicle(cadillac, 'Escalade V', suv, 115000, 2023).
 vehicle(lexus, 'LS 500', sedan, 105000, 2022).
 vehicle(genesis, 'G90', sedan, 98000, 2023).
+
+
+% True if a given reference has a price <= BudgetMax
+meet_budget(Reference, BudgetMax) :-
+    vehicle(_, Reference, _, Price, _),
+    Price =< BudgetMax.
+
+% True if Reference matches the requested Type
+filter_by_type(Reference, Type) :-
+    vehicle(_, Reference, Type, _, _).
+
+% True if Reference matches both Type and is within BudgetMax
+filter_by_type_and_budget(Reference, Type, BudgetMax) :-
+    vehicle(_, Reference, Type, Price, _),
+    Price =< BudgetMax.
+
+% Find vehicles newer than a given year
+newer_than(Reference, YearMin) :-
+    vehicle(_, Reference, _, _, Year),
+    Year > YearMin.
+
+% Find vehicles by brand
+find_by_brand(Brand, Reference) :-
+    vehicle(Brand, Reference, _, _, _).
+
+% Luxury filter: price above a threshold
+luxury(Reference, Threshold) :-
+    vehicle(_, Reference, _, Price, _),
+    Price >= Threshold.
+
+% Find all vehicles of a specific brand
+vehicles_by_brand(Brand, List) :-
+    findall(Reference,
+            vehicle(Brand, Reference, _, _, _),
+            List).
