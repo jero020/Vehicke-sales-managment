@@ -16,5 +16,6 @@ El inventario se definió con el predicado:
 
 ```prolog
 vehicle(Brand, Reference, Type, Price, Year).
+``` 
 
 
