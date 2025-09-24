@@ -1,21 +1,74 @@
-# Vehicle Sales Management System (Prolog)
+# Vehicle Catalog System - Prolog
 
- ## 👥 Integrantes
-- Jerónimo Vélez Acosta  
-- Pablo Manjarres Negrette
- ## 🎯 Objetivos de la práctica
-1. Implementar un sistema en Prolog para gestionar un inventario de vehículos.  
-2. Definir un catálogo de al menos 10 vehículos con atributos clave: **marca, referencia, tipo, precio y año**.  
-3. Implementar consultas y filtros usando predicados como `findall/3` y `bagof/3`.  
-4. Generar reportes que apliquen restricciones de presupuesto y valor total de inventario.  
-5. Probar el sistema con casos de uso definidos.  
+## 📌 Descripción
+Este proyecto implementa un sistema de gestión y consulta de un **catálogo de vehículos** utilizando Prolog.  
+Permite almacenar información de diferentes marcas y referencias de autos, aplicar filtros por presupuesto, agrupar por marca y tipo, y generar reportes con un inventario ajustado a un límite global.
 
----
-📚 Catálogo de vehículos
-El inventario se definió con el predicado:  
+## 📂 Estructura del código
 
+### **Parte 1: Base de Conocimiento**
+Se define la base de datos de vehículos con el predicado:
 ```prolog
 vehicle(Brand, Reference, Type, Price, Year).
-``` 
+```
+Ejemplo:
+```prolog
+vehicle(toyota, corolla, sedan, 22000, 2022).
+```
 
+### **Parte 2: Consultas y Filtros**
+1. **Filtrar por presupuesto:**
+   ```prolog
+   meet_budget(Reference, BudgetMax).
+   ```
+   Retorna las referencias con precio menor o igual al presupuesto.
 
+2. **Listar vehículos por marca:**
+   - Con `findall/3`:
+     ```prolog
+     vehicles_by_brand(Brand, Refs).
+     ```
+     Devuelve una lista de referencias de la marca dada.
+   - Con `bagof/3`:
+     ```prolog
+     vehicles_grouped_by_brand(Brand, Grouped).
+     ```
+     Devuelve referencias agrupadas con tipo y año.
+
+### **Parte 3: Generación de Reportes**
+El predicado principal es:
+```prolog
+generate_report(Brand, Type, Budget, report(Vehicles, Total)).
+```
+- Filtra vehículos por **marca**, **tipo** y **presupuesto**.
+- Calcula el valor total del inventario.
+- Ajusta la selección si el total excede el límite global de **1,000,000**.
+
+Funciones auxiliares:
+- `total_value/2`: Suma los precios de una lista de vehículos.  
+- `adjust_inventory/4`: Ajusta el inventario si excede el límite global.  
+- `take_until_limit/4`: Selecciona vehículos hasta cumplir con el límite.  
+
+## 🚀 Ejemplos de uso
+
+1. **Filtrar por presupuesto:**
+```prolog
+?- meet_budget(corolla, 25000).
+true.
+```
+
+2. **Listar vehículos por marca:**
+```prolog
+?- vehicles_by_brand(toyota, Refs).
+Refs = [corolla, camry, rav4].
+```
+
+3. **Generar reporte con presupuesto:**
+```prolog
+?- generate_report(ford, suv, 30000, Report).
+Report = report([(ford, escape, suv, 26000, 2022)], 26000).
+```
+
+## 👨‍💻 Autores
+- Pablo Manjarres  
+- Jerónimo Vélez  
