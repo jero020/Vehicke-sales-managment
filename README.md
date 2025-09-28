@@ -1,5 +1,7 @@
 # Vehicle Catalog System - Prolog
 
+https://www.youtube.com/watch?v=h56FjVaN2So
+
 ## 📌 Descripción
 Este proyecto implementa un sistema de gestión y consulta de un **catálogo de vehículos** utilizando Prolog.  
 Permite almacenar información de diferentes marcas y referencias de autos, aplicar filtros por presupuesto, agrupar por marca y tipo, y generar reportes con un inventario ajustado a un límite global.
@@ -72,3 +74,4 @@ Report = report([(ford, escape, suv, 26000, 2022)], 26000).
 ## 👨‍💻 Autores
 - Pablo Manjarres  
 - Jerónimo Vélez  
+
